@@ -6,17 +6,21 @@ class SQLiteController implements IDBController extends SQLite3{
     
     private $db ; 
     
-        //Table functions
     protected function CreateTable($tableName, $columnsNames, $columnsTypes){
         
     }
+    
     protected function InsertInto($tableName, $values)// bez sensu zapytanie!!!
     {
-        $sqlQuery = <<<EOF
-            INSERT INTO $tableName VALUES(EOF.
+        $sqlQuery = "
+            INSERT INTO $tableName VALUES(";
+        
             
-        foreach ($colors as $value) {
-            $value.");";
+        foreach ($values as $value) {
+            $sqlQuery .= $value.',';
+        }
+        $sqlQuery = substr($sqlQuery, 0, -1);
+        $sqlQuery.= ");";
         }
         try 
         {

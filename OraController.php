@@ -6,9 +6,25 @@ class OraController implements IDBController{
     private $conn;
     
       //Table functions
-    protected function CreateTable($tableName, $columnsNames, $columnsTypes);
+    protected function CreateTable($tableName, $columnsNames, $columnsTypes)
+    {
+        $sqlQuery = "CREATE TABLE $tableName (";
+        
+    }
+    
     protected function InsertInto($tableName, $values){
-        //...
+       $sqlQuery = "
+            INSERT INTO $tableName VALUES(";
+                   
+        foreach ($values as $value) {
+            $sqlQuery .= $value.',';
+        }
+         = substr($sqlQuery, 0, -1);
+        $sqlQuery.= ");";
+        
+        
+        $result=oci_parse($sqlQuery);
+        oci_execute($result,OCI_COMMIT_ON_SUCCESS);
     }
     
     protected function DropTable($tableName){
